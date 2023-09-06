@@ -77,6 +77,7 @@ func loadImage() -> Data? {
 func loadVideo() -> Data? {
     if let fileURL = Bundle.main.url(
         forResource: "rodgers2", withExtension: "mp4") {
+        
         if let fileContents = try? Data(contentsOf: fileURL) {
             print("loadVideo: successfully retrieve data from file!")
             return fileContents

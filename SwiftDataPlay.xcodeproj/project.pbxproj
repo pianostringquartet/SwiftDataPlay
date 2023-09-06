@@ -18,6 +18,7 @@
 		EC5108482AA278B90077B5B8 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5108472AA278B90077B5B8 /* Colors.swift */; };
 		EC51084A2AA278D40077B5B8 /* StitchMatrix_Float4x4.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5108492AA278D40077B5B8 /* StitchMatrix_Float4x4.swift */; };
 		EC886ED32AA8315100A6475E /* greco2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC886ED22AA8315100A6475E /* greco2.jpg */; };
+		EC886ED42AA8339B00A6475E /* rodgers2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = EC886ED12AA8313400A6475E /* rodgers2.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -249,6 +250,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC886ED42AA8339B00A6475E /* rodgers2.mp4 in Resources */,
 				EC886ED32AA8315100A6475E /* greco2.jpg in Resources */,
 				EC5108212AA24D130077B5B8 /* Preview Assets.xcassets in Resources */,
 				EC51081E2AA24D130077B5B8 /* Assets.xcassets in Resources */,
