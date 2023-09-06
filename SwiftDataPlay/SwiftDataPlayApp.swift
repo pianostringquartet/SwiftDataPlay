@@ -11,9 +11,13 @@ import SwiftData
 @main
 struct SwiftDataPlayApp: App {
     var sharedModelContainer: ModelContainer = {
+        
+        // 'top level' data types
         let schema = Schema([
             Item.self,
         ])
+        
+        // "The only top level item is Item.self"
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
         do {

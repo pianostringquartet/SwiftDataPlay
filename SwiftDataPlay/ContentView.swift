@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import AVKit
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
@@ -19,7 +20,22 @@ struct ContentView: View {
                     NavigationLink {
                         Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
                     } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+                        HStack {
+                            Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+                            
+                            if let imageData = item.image,
+                               let image = UIImage(data: imageData) {
+                                Image.init(uiImage: image)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .opacity(0.5)
+                                    .frame(width: 30, height: 30)
+                            }
+                            
+                            if let videoData = item.video {
+                                Text("bytes: \(videoData.count)")
+                            }
+                        }
                     }
                 }
                 .onDelete(perform: deleteItems)
@@ -35,13 +51,34 @@ struct ContentView: View {
                 }
             }
         } detail: {
-            Text("Select an item")
+            VStack {
+                Text("Select an item")
+                
+//                if let _item = items.first {
+//                    if let video = _item.video {
+//                        
+//                        // URL.init(dataRepresentation: <#T##Data#>, relativeTo: <#T##URL?#>, isAbsolute: <#T##Bool#>)
+//                                                
+//                        // let player = AVPlayer(url: <#T##NSURL#>)
+//                        
+//                        
+//                        VideoPlayer(
+//                            player: AVPlayer(
+//                                url:  Bundle.main.url(forResource: "video", withExtension: "mp4")!))
+//                        .frame(height: 400)
+//                    }
+//                    
+//                } // if let _item
+            }
+           
         }
     }
 
     private func addItem() {
         withAnimation {
-            let newItem = Item(timestamp: Date())
+            let newItem = Item(timestamp: Date(),
+                               child: .init(age: 2))
+            
             modelContext.insert(newItem)
         }
     }

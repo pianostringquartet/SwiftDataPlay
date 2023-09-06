@@ -15,6 +15,9 @@
 		EC51082D2AA24D140077B5B8 /* SwiftDataPlayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC51082C2AA24D140077B5B8 /* SwiftDataPlayTests.swift */; };
 		EC5108372AA24D140077B5B8 /* SwiftDataPlayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5108362AA24D140077B5B8 /* SwiftDataPlayUITests.swift */; };
 		EC5108392AA24D140077B5B8 /* SwiftDataPlayUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5108382AA24D140077B5B8 /* SwiftDataPlayUITestsLaunchTests.swift */; };
+		EC5108482AA278B90077B5B8 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5108472AA278B90077B5B8 /* Colors.swift */; };
+		EC51084A2AA278D40077B5B8 /* StitchMatrix_Float4x4.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5108492AA278D40077B5B8 /* StitchMatrix_Float4x4.swift */; };
+		EC886ED32AA8315100A6475E /* greco2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC886ED22AA8315100A6475E /* greco2.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,10 @@
 		EC5108322AA24D140077B5B8 /* SwiftDataPlayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftDataPlayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC5108362AA24D140077B5B8 /* SwiftDataPlayUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataPlayUITests.swift; sourceTree = "<group>"; };
 		EC5108382AA24D140077B5B8 /* SwiftDataPlayUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataPlayUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		EC5108472AA278B90077B5B8 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		EC5108492AA278D40077B5B8 /* StitchMatrix_Float4x4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StitchMatrix_Float4x4.swift; sourceTree = "<group>"; };
+		EC886ED12AA8313400A6475E /* rodgers2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = rodgers2.mp4; sourceTree = "<group>"; };
+		EC886ED22AA8315100A6475E /* greco2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = greco2.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,7 +108,11 @@
 				EC5108172AA24D120077B5B8 /* SwiftDataPlayApp.swift */,
 				EC5108192AA24D120077B5B8 /* ContentView.swift */,
 				EC51081B2AA24D120077B5B8 /* Item.swift */,
+				EC5108472AA278B90077B5B8 /* Colors.swift */,
+				EC5108492AA278D40077B5B8 /* StitchMatrix_Float4x4.swift */,
 				EC51081D2AA24D130077B5B8 /* Assets.xcassets */,
+				EC886ED22AA8315100A6475E /* greco2.jpg */,
+				EC886ED12AA8313400A6475E /* rodgers2.mp4 */,
 				EC5108222AA24D130077B5B8 /* SwiftDataPlay.entitlements */,
 				EC5108232AA24D130077B5B8 /* Info.plist */,
 				EC51081F2AA24D130077B5B8 /* Preview Content */,
@@ -238,6 +249,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC886ED32AA8315100A6475E /* greco2.jpg in Resources */,
 				EC5108212AA24D130077B5B8 /* Preview Assets.xcassets in Resources */,
 				EC51081E2AA24D130077B5B8 /* Assets.xcassets in Resources */,
 			);
@@ -264,7 +276,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC5108482AA278B90077B5B8 /* Colors.swift in Sources */,
 				EC51081A2AA24D120077B5B8 /* ContentView.swift in Sources */,
+				EC51084A2AA278D40077B5B8 /* StitchMatrix_Float4x4.swift in Sources */,
 				EC51081C2AA24D120077B5B8 /* Item.swift in Sources */,
 				EC5108182AA24D120077B5B8 /* SwiftDataPlayApp.swift in Sources */,
 			);
@@ -447,6 +461,8 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.MondayTest.SwiftDataPlay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -478,6 +494,8 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.MondayTest.SwiftDataPlay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
