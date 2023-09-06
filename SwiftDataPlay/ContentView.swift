@@ -37,7 +37,6 @@ struct ContentView: View {
                             }
                             
                             if let modelData = item.mlModel {
-                                CICoreMLModel(mo)
                                 Text("model bytes: \(modelData.count)")
                             }
                         }

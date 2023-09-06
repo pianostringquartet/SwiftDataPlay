@@ -95,6 +95,9 @@ func loadVideo() -> Data? {
 }
 
 func loadModel() -> Data? {
+    
+    print("Bundle.main.infoDictionary: \(Bundle.main.infoDictionary)")
+    
     if let fileURL = Bundle.main.url(
         forResource: "yolo", withExtension: "mlmodel") {
         
