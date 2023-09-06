@@ -43,6 +43,8 @@ final class Item {
     @Attribute(.externalStorage)
     var video: Data?
     
+    @Attribute(.externalStorage)
+    var mlModel: Data?
     
     init(timestamp: Date,
          child: ItemChild) {
@@ -52,6 +54,7 @@ final class Item {
         
         self.image = loadImage()
         self.video = loadVideo()
+        self.mlModel = loadModel()
     }
 }
 
@@ -86,6 +89,23 @@ func loadVideo() -> Data? {
         }
     } else {
         print("loadVideo: could not retrieve file...")
+    }
+    
+    return nil
+}
+
+func loadModel() -> Data? {
+    if let fileURL = Bundle.main.url(
+        forResource: "yolo", withExtension: "mlmodel") {
+        
+        if let fileContents = try? Data(contentsOf: fileURL) {
+            print("loadModel: successfully retrieve data from file!")
+            return fileContents
+        } else {
+            print("loadModel: could not retrieve data from file...")
+        }
+    } else {
+        print("loadModel: could not retrieve file...")
     }
     
     return nil

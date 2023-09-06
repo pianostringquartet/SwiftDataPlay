@@ -19,6 +19,8 @@
 		EC51084A2AA278D40077B5B8 /* StitchMatrix_Float4x4.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5108492AA278D40077B5B8 /* StitchMatrix_Float4x4.swift */; };
 		EC886ED32AA8315100A6475E /* greco2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC886ED22AA8315100A6475E /* greco2.jpg */; };
 		EC886ED42AA8339B00A6475E /* rodgers2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = EC886ED12AA8313400A6475E /* rodgers2.mp4 */; };
+		EC886ED62AA833E900A6475E /* yolo.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = EC886ED52AA833E900A6475E /* yolo.mlmodel */; };
+		EC886ED72AA833FA00A6475E /* yolo.mlmodel in Resources */ = {isa = PBXBuildFile; fileRef = EC886ED52AA833E900A6475E /* yolo.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,7 @@
 		EC5108492AA278D40077B5B8 /* StitchMatrix_Float4x4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StitchMatrix_Float4x4.swift; sourceTree = "<group>"; };
 		EC886ED12AA8313400A6475E /* rodgers2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = rodgers2.mp4; sourceTree = "<group>"; };
 		EC886ED22AA8315100A6475E /* greco2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = greco2.jpg; sourceTree = "<group>"; };
+		EC886ED52AA833E900A6475E /* yolo.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = yolo.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +117,7 @@
 				EC51081D2AA24D130077B5B8 /* Assets.xcassets */,
 				EC886ED22AA8315100A6475E /* greco2.jpg */,
 				EC886ED12AA8313400A6475E /* rodgers2.mp4 */,
+				EC886ED52AA833E900A6475E /* yolo.mlmodel */,
 				EC5108222AA24D130077B5B8 /* SwiftDataPlay.entitlements */,
 				EC5108232AA24D130077B5B8 /* Info.plist */,
 				EC51081F2AA24D130077B5B8 /* Preview Content */,
@@ -250,6 +254,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC886ED72AA833FA00A6475E /* yolo.mlmodel in Resources */,
 				EC886ED42AA8339B00A6475E /* rodgers2.mp4 in Resources */,
 				EC886ED32AA8315100A6475E /* greco2.jpg in Resources */,
 				EC5108212AA24D130077B5B8 /* Preview Assets.xcassets in Resources */,
@@ -279,6 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC5108482AA278B90077B5B8 /* Colors.swift in Sources */,
+				EC886ED62AA833E900A6475E /* yolo.mlmodel in Sources */,
 				EC51081A2AA24D120077B5B8 /* ContentView.swift in Sources */,
 				EC51084A2AA278D40077B5B8 /* StitchMatrix_Float4x4.swift in Sources */,
 				EC51081C2AA24D120077B5B8 /* Item.swift in Sources */,

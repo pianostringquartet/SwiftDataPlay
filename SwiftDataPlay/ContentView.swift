@@ -33,7 +33,12 @@ struct ContentView: View {
                             }
                             
                             if let videoData = item.video {
-                                Text("bytes: \(videoData.count)")
+                                Text("video bytes: \(videoData.count)")
+                            }
+                            
+                            if let modelData = item.mlModel {
+                                CICoreMLModel(mo)
+                                Text("model bytes: \(modelData.count)")
                             }
                         }
                     }
