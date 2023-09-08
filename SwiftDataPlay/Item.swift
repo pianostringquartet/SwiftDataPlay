@@ -9,6 +9,7 @@ import Foundation
 import SwiftData
 import SwiftUI
 import CoreML
+import Vision
 
 
 enum Mood: Equatable, Codable {
@@ -25,8 +26,26 @@ enum Mood: Equatable, Codable {
     , color(RGBA)
 }
 
-extension MLModel: PersistentModel {
-    public var persistentBackingData: BackingData<MLModel> {
+//extension MLModel: PersistentModel {
+//    public var persistentBackingData: any BackingData<MLModel> {
+//        get {
+//            print("get")
+//            return
+//        }
+//        set(newValue) {
+//            print("set")
+//        }
+//    }
+//    
+//    public static var schemaMetadata: [Schema.PropertyMetadata] {
+//        []
+//    }
+//    
+//    
+//}
+
+extension VNCoreMLModel: PersistentModel {
+    public var persistentBackingData: BackingData<VNCoreMLModel> {
         get {
             <#code#>
         }
@@ -36,7 +55,10 @@ extension MLModel: PersistentModel {
     }
     
     public static var schemaMetadata: [Schema.PropertyMetadata] {
-        <#code#>
+        [
+            ("name", \VNCoreMLModel.inputImageFeatureName, nil, nil),
+            ("test", \VNCoreMLModel.id)
+        ]
     }
     
     
@@ -65,7 +87,8 @@ final class Item {
     @Attribute(.externalStorage)
 //    var mlModel: Data?
 //    var mlModel: YOLOv3Tiny?
-    var mlModel: MLModel?
+//    var mlModel: MLModel?
+    var mlModel: VNCoreMLModel?
         
     init(timestamp: Date,
          child: ItemChild) {
@@ -117,7 +140,8 @@ func loadVideo() -> Data? {
     return nil
 }
 
-func loadModel() -> MLModel? {
+//func loadModel() -> MLModel? {
+func loadModel() -> VNCoreMLModel? {
     
     print("Bundle.main.infoDictionary: \(Bundle.main.infoDictionary)")
     
@@ -133,10 +157,20 @@ func loadModel() -> MLModel? {
             print("loadModel: could not retrieve data from file...")
         }
         
+//        if let model = try? MLModel(contentsOf: fileURL) {
+//            print("loadModel: successfully retrieved MLModel from file!")
+//            return model
+//        } 
         if let model = try? MLModel(contentsOf: fileURL) {
             print("loadModel: successfully retrieved MLModel from file!")
-            return model
-        } else {
+//            return model
+            if let vnCoreML = try? VNCoreMLModel(for: model) {
+                print("loadModel: successfully retrieved VNCoreMLModel from file!")
+                return vnCoreML
+            }
+        }
+        //
+        else {
             print("loadModel: could not retrieve MLModel from file...")
         }
         

@@ -37,7 +37,8 @@ struct ContentView: View {
                             }
                             
                             if let modelData = item.mlModel {
-                                Text("model bytes: \(modelData.count)")
+//                                Text("model bytes: \(modelData.count)")
+                                Text("had model")
                             }
                         }
                     }
