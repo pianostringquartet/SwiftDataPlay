@@ -44,25 +44,25 @@ enum Mood: Equatable, Codable {
 //    
 //}
 
-extension VNCoreMLModel: PersistentModel {
-    public var persistentBackingData: BackingData<VNCoreMLModel> {
-        get {
-            <#code#>
-        }
-        set(newValue) {
-            <#code#>
-        }
-    }
-    
-    public static var schemaMetadata: [Schema.PropertyMetadata] {
-        [
-            ("name", \VNCoreMLModel.inputImageFeatureName, nil, nil),
-            ("test", \VNCoreMLModel.id)
-        ]
-    }
-    
-    
-}
+//extension VNCoreMLModel: PersistentModel {
+//    public var persistentBackingData: BackingData<VNCoreMLModel> {
+//        get {
+//            <#code#>
+//        }
+//        set(newValue) {
+//            <#code#>
+//        }
+//    }
+//    
+//    public static var schemaMetadata: [Schema.PropertyMetadata] {
+//        [
+//            ("name", \VNCoreMLModel.inputImageFeatureName, nil, nil),
+//            ("test", \VNCoreMLModel.id)
+//        ]
+//    }
+//    
+//    
+//}
 
 @Model
 final class Item {
@@ -85,10 +85,10 @@ final class Item {
     var video: Data?
     
     @Attribute(.externalStorage)
-//    var mlModel: Data?
+    var mlModel: Data?
 //    var mlModel: YOLOv3Tiny?
 //    var mlModel: MLModel?
-    var mlModel: VNCoreMLModel?
+//    var mlModel: VNCoreMLModel?
         
     init(timestamp: Date,
          child: ItemChild) {
@@ -97,7 +97,7 @@ final class Item {
         self.mood = .fear("snakes")
         
         self.image = loadImage()
-        self.video = loadVideo()
+    
 //        self.mlModel = loadModel()
         self.mlModel = loadModel()
     }
@@ -139,67 +139,57 @@ func loadVideo() -> Data? {
     
     return nil
 }
-
-//func loadModel() -> MLModel? {
-func loadModel() -> VNCoreMLModel? {
-    
-    print("Bundle.main.infoDictionary: \(Bundle.main.infoDictionary)")
-    
-    if let fileURL = Bundle.main.url(
-        forResource: "yolo", withExtension: "mlmodel") {
-        
-        print("loadModel: fileURL: \(fileURL)")
-        
-        if let fileContents = try? Data(contentsOf: fileURL) {
-            print("loadModel: successfully retrieve data from file!")
-            // return fileContents
-        } else {
-            print("loadModel: could not retrieve data from file...")
-        }
-        
-//        if let model = try? MLModel(contentsOf: fileURL) {
-//            print("loadModel: successfully retrieved MLModel from file!")
-//            return model
-//        } 
-        if let model = try? MLModel(contentsOf: fileURL) {
-            print("loadModel: successfully retrieved MLModel from file!")
-//            return model
-            if let vnCoreML = try? VNCoreMLModel(for: model) {
-                print("loadModel: successfully retrieved VNCoreMLModel from file!")
-                return vnCoreML
-            }
-        }
-        //
-        else {
-            print("loadModel: could not retrieve MLModel from file...")
-        }
-        
-    } else {
-        print("loadModel: could not retrieve file...")
-    }
-    
-    return nil
-}
-
+//
 //func loadModel() -> Data? {
-//    
-//    print("Bundle.main.infoDictionary: \(Bundle.main.infoDictionary)")
+////func loadModel() -> MLModel? {
+////func loadModel() -> VNCoreMLModel? {
 //    
 //    if let fileURL = Bundle.main.url(
 //        forResource: "yolo", withExtension: "mlmodelc") {
-//
+//        
+//        print("loadModel: fileURL: \(fileURL)")
+//        
 //        if let fileContents = try? Data(contentsOf: fileURL) {
 //            print("loadModel: successfully retrieve data from file!")
-//            return fileContents
+//             return fileContents
 //        } else {
 //            print("loadModel: could not retrieve data from file...")
 //        }
+//        
+////        if let model = try? MLModel(contentsOf: fileURL) {
+////            print("loadModel: successfully retrieved MLModel from file!")
+//////            return model
+////            if let vnCoreML = try? VNCoreMLModel(for: model) {
+////                print("loadModel: successfully retrieved VNCoreMLModel from file!")
+////                return vnCoreML
+////            }
+////        }
+////        //
+////        else {
+////            print("loadModel: could not retrieve MLModel from file...")
+////        }
+//        
 //    } else {
 //        print("loadModel: could not retrieve file...")
 //    }
 //    
 //    return nil
 //}
+
+func loadModel() -> Data? {
+    if let fileURL = Bundle.main.url(
+        forResource: "yolo", withExtension: "mlmodelc") {
+        if let fileContents = try? Data(contentsOf: fileURL) {
+            print("loadModel: successfully retrieve data from file!")
+            return fileContents
+        } else {
+            print("loadModel: could not retrieve data from file...")
+        }
+    } else {
+        print("loadModel: could not retrieve file...")
+    }
+    return nil
+}
 
 
 let log = print

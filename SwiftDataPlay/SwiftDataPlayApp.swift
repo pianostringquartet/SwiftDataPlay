@@ -17,6 +17,8 @@ struct SwiftDataPlayApp: App {
             Item.self,
         ])
         
+        
+        
         // "The only top level item is Item.self"
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -30,6 +32,10 @@ struct SwiftDataPlayApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .onTapGesture {
+//                    sharedModelContainer.configurations.first?.
+                    sharedModelContainer.configurations.first?.
+                }
         }
         .modelContainer(sharedModelContainer)
     }

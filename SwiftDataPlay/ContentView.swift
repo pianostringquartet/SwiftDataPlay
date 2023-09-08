@@ -13,6 +13,15 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
 
+    var tester: some View {
+        Text("love").onTapGesture {
+            
+//            modelContext.
+            {
+            
+        }
+    }
+    
     var body: some View {
         NavigationSplitView {
             List {
@@ -36,10 +45,10 @@ struct ContentView: View {
                                 Text("video bytes: \(videoData.count)")
                             }
                             
-                            if let modelData = item.mlModel {
-//                                Text("model bytes: \(modelData.count)")
-                                Text("had model")
-                            }
+//                            if let modelData = item.mlModel {
+////                                Text("model bytes: \(modelData.count)")
+//                                Text("had model")
+//                            }
                         }
                     }
                 }
