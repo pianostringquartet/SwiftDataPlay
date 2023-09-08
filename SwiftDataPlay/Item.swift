@@ -8,6 +8,8 @@
 import Foundation
 import SwiftData
 import SwiftUI
+import CoreML
+
 
 enum Mood: Equatable, Codable {
     case love, 
@@ -21,6 +23,23 @@ enum Mood: Equatable, Codable {
     
 //    , color(Color)
     , color(RGBA)
+}
+
+extension MLModel: PersistentModel {
+    public var persistentBackingData: BackingData<MLModel> {
+        get {
+            <#code#>
+        }
+        set(newValue) {
+            <#code#>
+        }
+    }
+    
+    public static var schemaMetadata: [Schema.PropertyMetadata] {
+        <#code#>
+    }
+    
+    
 }
 
 @Model
@@ -44,8 +63,10 @@ final class Item {
     var video: Data?
     
     @Attribute(.externalStorage)
-    var mlModel: Data?
-    
+//    var mlModel: Data?
+//    var mlModel: YOLOv3Tiny?
+    var mlModel: MLModel?
+        
     init(timestamp: Date,
          child: ItemChild) {
         self.timestamp = timestamp
@@ -54,9 +75,11 @@ final class Item {
         
         self.image = loadImage()
         self.video = loadVideo()
+//        self.mlModel = loadModel()
         self.mlModel = loadModel()
     }
 }
+
 
 func loadImage() -> Data? {
     if let fileURL = Bundle.main.url(
@@ -94,25 +117,55 @@ func loadVideo() -> Data? {
     return nil
 }
 
-func loadModel() -> Data? {
+func loadModel() -> MLModel? {
     
     print("Bundle.main.infoDictionary: \(Bundle.main.infoDictionary)")
     
     if let fileURL = Bundle.main.url(
         forResource: "yolo", withExtension: "mlmodel") {
         
+        print("loadModel: fileURL: \(fileURL)")
+        
         if let fileContents = try? Data(contentsOf: fileURL) {
             print("loadModel: successfully retrieve data from file!")
-            return fileContents
+            // return fileContents
         } else {
             print("loadModel: could not retrieve data from file...")
         }
+        
+        if let model = try? MLModel(contentsOf: fileURL) {
+            print("loadModel: successfully retrieved MLModel from file!")
+            return model
+        } else {
+            print("loadModel: could not retrieve MLModel from file...")
+        }
+        
     } else {
         print("loadModel: could not retrieve file...")
     }
     
     return nil
 }
+
+//func loadModel() -> Data? {
+//    
+//    print("Bundle.main.infoDictionary: \(Bundle.main.infoDictionary)")
+//    
+//    if let fileURL = Bundle.main.url(
+//        forResource: "yolo", withExtension: "mlmodelc") {
+//
+//        if let fileContents = try? Data(contentsOf: fileURL) {
+//            print("loadModel: successfully retrieve data from file!")
+//            return fileContents
+//        } else {
+//            print("loadModel: could not retrieve data from file...")
+//        }
+//    } else {
+//        print("loadModel: could not retrieve file...")
+//    }
+//    
+//    return nil
+//}
 
 
 let log = print
