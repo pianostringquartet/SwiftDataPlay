@@ -96,6 +96,10 @@ enum Mood: Equatable, Codable {
 @Model
 final class Item {
     var timestamp: Date = Date.now
+    
+    @Transient
+    var dogName: String = "Rex"
+    
 
 //    var child: ItemChild? // must be optional b/c cloud-kit
 //    var child: ItemChild
@@ -107,29 +111,20 @@ final class Item {
 //    var mood: Mood = Mood.maybeValue(.nothing)
     
 //    var mood: Mood = Mood.layerId(.init(UUID()))
-    
-//    var mood: Mood = Mood.layerId(.none)
-    
 //    var mood: Mood = Mood.myNumber(9)
-    
-    // optional
-    
+            
     @Attribute(.externalStorage)
     var image: Data?
     
     @Attribute(.externalStorage)
     var video: Data?
-    
-//    @Attribute(.externalStorage)
-//    var mlModel: Data?
-//    var mlModel: YOLOv3Tiny?
-//    var mlModel: MLModel?
-//    var mlModel: VNCoreMLModel?
-        
+            
     init(timestamp: Date) {
         self.timestamp = timestamp
+        
+        self.dogName = "Old Yeller"
+        
 //        self.mood = .joy(55)
-//        self.mood = .maybeValue(.none)
 //        self.mood = .maybeValue(.nothing)
 //        self.mood = .maybeValue(.present(66))
         
@@ -139,11 +134,6 @@ final class Item {
 //        self.mood = .myNumber(nil)
 //        self.mood = .layerId(.none)
         
-        
-//        self.mood = .layerId(.init(.init())) // .fear("snakes")
-//        self.mood = .layerId(nil)
-//        self.mood = .layerId(.none)
-        
         self.image = loadImage()
     }
 }
@@ -151,11 +141,8 @@ final class Item {
 
 func loadImage() -> Data? {
     if let fileURL = Bundle.main.url(
-//            forResource: "rodgers",
-//            withExtension: "mp4") {
         forResource: "greco2", withExtension: "jpg") {
         if let fileContents = try? Data(contentsOf: fileURL) {
-//                self.video = fileContents
             print("loadImage: successfully retrieve data from file!")
             return fileContents
         } else {

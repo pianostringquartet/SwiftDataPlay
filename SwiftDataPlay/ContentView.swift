@@ -11,27 +11,21 @@ import AVKit
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
+    
     @Query private var items: [Item]
+    
+//    var items: [Item] {
+//        let k = try? modelContext.fetch(FetchDescriptor<Item>())
+//        return k ?? []
+//    }
 
-    var tester: some View {
-        Text("love")
-    }
-    
-    var _body: some View {
-        VStack {
-            ForEach(items) { item in
-                HStack {
-                    Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                        .onTapGesture {
-                            print("item.mood.getMaybeId: \(item.mood.getMaybeId)")
-                        }
-                }
-                
-            }
-        }
-    }
-    
-    
+    /*
+     // Nodes visible at this traversal level
+     private var nodes: NodeEntities {
+         document.nodes!.filter { $0.parentGroupNodeId == groupNodeFocused?.asNodeId }
+     }
+     */
+        
     var body: some View {
         NavigationSplitView {
             List {
@@ -41,27 +35,10 @@ struct ContentView: View {
                     } label: {
                         HStack {
                             Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+
+                            //                            Text("test: \(item.mood.display)")
                             
-//                            if let _id = item.mood.getId {
-//                                Text("_id: \(_id.id.uuidString)")
-//                            } else {
-//                                Text("no id...")
-//                            }
-//                                   
-//                            if let n = item.mood.getNumber {
-//                                Text("n: \(n)")
-//                            } else {
-//                                Text("no number")
-//                            }
-                            
-//                            if let n = item.mood.getMaybeId {
-//                                Text("Had some id")
-//                            } else {
-//                                Text("Had none...")
-//                            }
-                            
-                            Text("test: \(item.mood.display)")
-                            
+                            Text("dog \(item.dogName)")
                             
                             if let imageData = item.image,
                                let image = UIImage(data: imageData) {
@@ -101,6 +78,7 @@ struct ContentView: View {
     private func addItem() {
         withAnimation {
             let newItem = Item(timestamp: Date())
+            print("addItem: newItem: \(newItem)")
             modelContext.insert(newItem)
         }
     }

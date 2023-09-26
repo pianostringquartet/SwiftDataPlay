@@ -30,13 +30,6 @@ struct SwiftDataPlayApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .onTapGesture {
-//                    sharedModelContainer.configurations.first?.
-//                    sharedModelContainer.configurations.first?.
-                }
-//                .onAppear {
-//                    sharedModelContainer.deleteAllData()
-//                }
         }
         .modelContainer(sharedModelContainer)
     }
