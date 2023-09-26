@@ -14,12 +14,7 @@ struct ContentView: View {
     @Query private var items: [Item]
 
     var tester: some View {
-        Text("love").onTapGesture {
-            
-//            modelContext.
-            {
-            
-        }
+        Text("love")
     }
     
     var body: some View {
@@ -31,6 +26,20 @@ struct ContentView: View {
                     } label: {
                         HStack {
                             Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+                            
+//                            if let _id = item.mood.getId {
+//                                Text("_id: \(_id.id.uuidString)")
+//                            } else {
+//                                Text("no id...")
+//                            }
+//                                   
+//                            
+                            if let n = item.mood.getNumber {
+                                Text("n: \(n)")
+                            } else {
+                                Text("no number")
+                            }
+                                   
                             
                             if let imageData = item.image,
                                let image = UIImage(data: imageData) {
@@ -44,6 +53,8 @@ struct ContentView: View {
                             if let videoData = item.video {
                                 Text("video bytes: \(videoData.count)")
                             }
+                            
+                        
                             
 //                            if let modelData = item.mlModel {
 ////                                Text("model bytes: \(modelData.count)")
