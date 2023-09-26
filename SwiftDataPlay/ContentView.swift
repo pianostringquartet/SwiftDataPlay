@@ -17,6 +17,21 @@ struct ContentView: View {
         Text("love")
     }
     
+    var _body: some View {
+        VStack {
+            ForEach(items) { item in
+                HStack {
+                    Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+                        .onTapGesture {
+                            print("item.mood.getMaybeId: \(item.mood.getMaybeId)")
+                        }
+                }
+                
+            }
+        }
+    }
+    
+    
     var body: some View {
         NavigationSplitView {
             List {
@@ -33,13 +48,20 @@ struct ContentView: View {
 //                                Text("no id...")
 //                            }
 //                                   
-//                            
-                            if let n = item.mood.getNumber {
-                                Text("n: \(n)")
-                            } else {
-                                Text("no number")
-                            }
-                                   
+//                            if let n = item.mood.getNumber {
+//                                Text("n: \(n)")
+//                            } else {
+//                                Text("no number")
+//                            }
+                            
+//                            if let n = item.mood.getMaybeId {
+//                                Text("Had some id")
+//                            } else {
+//                                Text("Had none...")
+//                            }
+                            
+                            Text("test: \(item.mood.display)")
+                            
                             
                             if let imageData = item.image,
                                let image = UIImage(data: imageData) {
@@ -53,13 +75,6 @@ struct ContentView: View {
                             if let videoData = item.video {
                                 Text("video bytes: \(videoData.count)")
                             }
-                            
-                        
-                            
-//                            if let modelData = item.mlModel {
-////                                Text("model bytes: \(modelData.count)")
-//                                Text("had model")
-//                            }
                         }
                     }
                 }
@@ -78,22 +93,6 @@ struct ContentView: View {
         } detail: {
             VStack {
                 Text("Select an item")
-                
-//                if let _item = items.first {
-//                    if let video = _item.video {
-//                        
-//                        // URL.init(dataRepresentation: <#T##Data#>, relativeTo: <#T##URL?#>, isAbsolute: <#T##Bool#>)
-//                                                
-//                        // let player = AVPlayer(url: <#T##NSURL#>)
-//                        
-//                        
-//                        VideoPlayer(
-//                            player: AVPlayer(
-//                                url:  Bundle.main.url(forResource: "video", withExtension: "mp4")!))
-//                        .frame(height: 400)
-//                    }
-//                    
-//                } // if let _item
             }
            
         }
@@ -101,9 +100,7 @@ struct ContentView: View {
 
     private func addItem() {
         withAnimation {
-            let newItem = Item(timestamp: Date(),
-                               child: .init(age: 2))
-            
+            let newItem = Item(timestamp: Date())
             modelContext.insert(newItem)
         }
     }

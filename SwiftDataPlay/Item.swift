@@ -22,13 +22,17 @@ struct LayerNodeId: Equatable, Codable, Hashable, Identifiable {
 typealias NodeId = UUID
 
 enum MaybeId: Equatable, Codable {
-    case some(LayerNodeId),
-         none
+//    case present(LayerNodeId),
+    case present(Int),
+         nothing
     
-    var getSome: LayerNodeId? {
+//    var getSome: LayerNodeId? {
+//    var getSome: Int? {
+    var getSome: Int {
         switch self {
-        case .some(let x): return x
-        default: return nil
+        case .present(let x): return x
+//        default: return nil
+        default: return 99999
         }
     }
 }
@@ -45,26 +49,45 @@ enum Mood: Equatable, Codable {
     
 //    , color(Color)
     , color(RGBA)
-    , layerId(LayerNodeId)
+//    , layerId(LayerNodeId)
 //    , layerId(LayerNodeId?)
     
 //    , layerId(MaybeId)
+//    
+//    , myNumber(Int?)
     
-    , myNumber(Int?)
+    , maybeValue(MaybeId)
     
-    var getId: LayerNodeId? {
+//    var getId: LayerNodeId? {
+//        switch self {
+////        case .layerId(let x): return x
+//        case .layerId(let x): return x.getSome
+//        default: return nil
+//        }
+//    }
+//    
+//    var getNumber: Int? {
+//        switch self {
+//        case .myNumber(let x): return x
+//        default: return nil
+//        }
+//    }
+    
+//    var getMaybeId: LayerNodeId? {
+//    var getMaybeId: Int? {
+    var getMaybeId: Int {
         switch self {
-        case .layerId(let x): return x
-//        case .layerId(let x):
-//            return x.getSome
-        default: return nil
+            //        case .layerId(let x): return x
+        case .maybeValue(let x): return x.getSome
+//        default: return nil
+        default: return 55555
         }
     }
     
-    var getNumber: Int? {
+    var display: String {
         switch self {
-        case .myNumber(let x): return x
-        default: return nil
+        case .maybeValue: return "MaybeValue"
+        default: return "other..."
         }
     }
 }
@@ -79,13 +102,15 @@ final class Item {
     
     // Does not need to be optional, since not a model
 //    @Attribute(.transformable(by: ))
-//    var mood: Mood = Mood.joy(77)
+    var mood: Mood = Mood.joy(77)
+//    var mood: Mood = Mood.maybeValue(.none)
+//    var mood: Mood = Mood.maybeValue(.nothing)
     
 //    var mood: Mood = Mood.layerId(.init(UUID()))
     
 //    var mood: Mood = Mood.layerId(.none)
     
-    var mood: Mood = Mood.myNumber(9)
+//    var mood: Mood = Mood.myNumber(9)
     
     // optional
     
@@ -101,13 +126,18 @@ final class Item {
 //    var mlModel: MLModel?
 //    var mlModel: VNCoreMLModel?
         
-    init(timestamp: Date,
-         child: ItemChild) {
+    init(timestamp: Date) {
         self.timestamp = timestamp
 //        self.mood = .joy(55)
+//        self.mood = .maybeValue(.none)
+//        self.mood = .maybeValue(.nothing)
+//        self.mood = .maybeValue(.present(66))
+        
+        self.mood = .maybeValue(.nothing)
         
 //        self.mood = .myNumber(23)
-        self.mood = .myNumber(nil)
+//        self.mood = .myNumber(nil)
+//        self.mood = .layerId(.none)
         
         
 //        self.mood = .layerId(.init(.init())) // .fear("snakes")
@@ -115,9 +145,6 @@ final class Item {
 //        self.mood = .layerId(.none)
         
         self.image = loadImage()
-    
-//        self.mlModel = loadModel()
-//        self.mlModel = loadModel()
     }
 }
 
@@ -157,70 +184,5 @@ func loadVideo() -> Data? {
     
     return nil
 }
-//
-
-//func loadModel() -> Data? {
-////func loadModel() -> MLModel? {
-////func loadModel() -> VNCoreMLModel? {
-//    
-//    if let fileURL = Bundle.main.url(
-//        forResource: "yolo", withExtension: "mlmodelc") {
-//        
-//        print("loadModel: fileURL: \(fileURL)")
-//        
-//        if let fileContents = try? Data(contentsOf: fileURL) {
-//            print("loadModel: successfully retrieve data from file!")
-////             return fileContents
-//        } else {
-//            print("loadModel: could not retrieve data from file...")
-//        }
-//        
-//        if let model = try? MLModel(contentsOf: fileURL) {
-//            print("loadModel: successfully retrieved MLModel from file!")
-//             return model
-////            model.classCode.encode(to: <#T##any Encoder#>)
-//            
-//            
-//            if let vnCoreML = try? VNCoreMLModel(for: model) {
-//                print("loadModel: successfully retrieved VNCoreMLModel from file!")
-////                return vnCoreML
-//            }
-//        }
-//        //
-//        else {
-//            print("loadModel: could not retrieve MLModel from file...")
-//        }
-//        
-//    } else {
-//        print("loadModel: could not retrieve file...")
-//    }
-//    
-//    return nil
-//}
-
-//func loadModel() -> Data? {
-//    if let fileURL = Bundle.main.url(
-//        forResource: "yolo", withExtension: "mlmodelc") {
-//        if let fileContents = try? Data(contentsOf: fileURL) {
-//            print("loadModel: successfully retrieve data from file!")
-//            return fileContents
-//        } else {
-//            print("loadModel: could not retrieve data from file...")
-//        }
-//    } else {
-//        print("loadModel: could not retrieve file...")
-//    }
-//    return nil
-//}
-
 
 let log = print
-
-// @Model
-final class ItemChild {
-    var age: Int = 99 // For cloud kit, every property needs a default value
-    
-    init(age: Int) {
-        self.age = age
-    }
-}
