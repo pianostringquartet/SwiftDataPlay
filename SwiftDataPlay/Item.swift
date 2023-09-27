@@ -93,6 +93,54 @@ enum Mood: Equatable, Codable {
 }
 
 
+class PortValueTransformer: ValueTransformer {
+    // return data
+      override func transformedValue(_ value: Any?) -> Any? {
+          guard let portValue = value as? PortValue else {
+              print("PortValueTransformer: transformedValue: no port value")
+//              return nil
+              return nil
+          }
+          do {
+//              let data = try NSKeyedArchiver.archivedData(
+//                withRootObject: portValue,
+//                requiringSecureCoding: true)
+
+              let data = try JSONEncoder().encode(portValue)
+              return data
+          } catch {
+              print("PortValueTransformer: transformedValue: failed")
+              return nil
+          }
+      }
+    
+    override class func allowsReverseTransformation() -> Bool {
+        true
+    }
+      
+      // return UIColor
+      override func reverseTransformedValue(_ value: Any?) -> Any? {
+          guard let data = value as? Data else {
+              print("PortValueTransformer: reverseTransformedValue: no data")
+              return nil
+          }
+          
+          do {
+              let portValue = try JSONDecoder().decode(PortValue.self, from: data)
+              
+//              let portValue = try NSKeyedUnarchiver.unarchivedObject(
+//                ofClass: PortValue.self,
+//                from: data)
+              
+              return portValue
+          } catch {
+              print("PortValueTransformer: reverseTransformedValue: failed")
+              return nil
+          }
+      }
+}
+
+
 @Model
 final class Item {
     var timestamp: Date = Date.now
@@ -100,44 +148,79 @@ final class Item {
     @Transient
     var dogName: String = "Rex"
     
-
-//    var child: ItemChild? // must be optional b/c cloud-kit
-//    var child: ItemChild
+    
+    //    var child: ItemChild? // must be optional b/c cloud-kit
+    //    var child: ItemChild
     
     // Does not need to be optional, since not a model
-//    @Attribute(.transformable(by: ))
+    //    @Attribute(.transformable(by: ))
     var mood: Mood = Mood.joy(77)
-//    var mood: Mood = Mood.maybeValue(.none)
-//    var mood: Mood = Mood.maybeValue(.nothing)
+    //    var mood: Mood = Mood.maybeValue(.none)
+    //    var mood: Mood = Mood.maybeValue(.nothing)
     
-//    var mood: Mood = Mood.layerId(.init(UUID()))
-//    var mood: Mood = Mood.myNumber(9)
-            
+    //    var mood: Mood = Mood.layerId(.init(UUID()))
+    //    var mood: Mood = Mood.myNumber(9)
+    
+//    var values: [PortValue] = [PortValue.number(999)]
+    
+//    var value: PortValue = PortValue.number(999)
+    
+    @Attribute(.transformable(by: PortValueTransformer.self))
+    var value: PortValue = PortValue.number(999)
+    
+//    @Attribute(.transformable(by: ))
+//    @Attribute(.transformable(by: { x in
+//        x
+//    }))
+    
+    
+    
+//    @Attribute(.transformable) var value: PortValue {
+//        get {
+//            _$observationRegistrar.access(self, keyPath: \.value)
+//            
+//            // return Color(hex: self.getValue(for: \.value))
+//            return self.getValue(forKey: \.value)
+//           }
+//
+//           set {
+//               _$observationRegistrar.withMutation(of: self, keyPath: \.value) {
+//                   self.setValue(forKey: \.value, 
+//                                 to: newValue)
+//               }
+//           }
+//    }
+//    
     @Attribute(.externalStorage)
     var image: Data?
     
     @Attribute(.externalStorage)
     var video: Data?
-            
-    init(timestamp: Date) {
+    
+    init(timestamp: Date,
+//         _ values: PortValues) {
+         _ values: PortValue) {
         self.timestamp = timestamp
-        
         self.dogName = "Old Yeller"
-        
-//        self.mood = .joy(55)
+        self.mood = .joy(55)
 //        self.mood = .maybeValue(.nothing)
 //        self.mood = .maybeValue(.present(66))
-        
-        self.mood = .maybeValue(.nothing)
-        
+//        self.mood = .maybeValue(.nothing)
 //        self.mood = .myNumber(23)
 //        self.mood = .myNumber(nil)
 //        self.mood = .layerId(.none)
         
+//        self.values = values
+        print("Item init: value: \(values)")
+        self.value = values
+        
+        
         self.image = loadImage()
+        print("Item init: self.value: \(self.value)")
     }
 }
 
+typealias PortValues = [PortValue]
 
 func loadImage() -> Data? {
     if let fileURL = Bundle.main.url(
